@@ -4,7 +4,7 @@ const fs = require('fs')
 const path = require('path')
 const mongoose = require('mongoose')
 
-const db = 'mongodb://localhost/test'
+const db = 'mongodb://120.78.221.132:27017/main'
 
 /**
  * mongoose连接数据库
@@ -12,6 +12,10 @@ const db = 'mongodb://localhost/test'
  */
 mongoose.Promise = require('bluebird')
 mongoose.connect(db)
+mongoose.connection.on('connected',(err,res) => {
+  if(err) console.log('链接失败');
+  console.log('链接成功');
+})
 
 /**
  * 获取数据库表对应的js对象所在的路径

@@ -11,44 +11,26 @@ var Schema = mongoose.Schema;
  * @type {mongoose}
  */
 var UserSchema = new Schema({
-	phoneNumber: {
-    unique: true,
+	name:{
+    required: true,
     type: String
   },
-  areaCode: String,
-  verifyCode: String,
-  verified: {
-    type: Boolean,
-    default: false
-  },
-  accessToken: String,
-  nickname: String,
-  gender: String,
-  breed: String,
-  age: String,
-  avatar: String,
-  meta: {
-    createAt: {
-      type: Date,
-      dafault: Date.now()
-    },
-    updateAt: {
-      type: Date,
-      dafault: Date.now()
-    }
+  pwd:{
+    required: true,
+    type: String
   }
 })
 
 // Defines a pre hook for the document.
-UserSchema.pre('save', function(next) {
-  if (this.isNew) {
-    this.meta.createAt = this.meta.updateAt = Date.now()
-  }
-  else {
-    this.meta.updateAt = Date.now()
-  }
-  next()
-})
+// UserSchema.pre('save', function(next) {
+//   if (this.isNew) {
+//     this.meta.createAt = this.meta.updateAt = Date.now()
+//   }
+//   else {
+//     this.meta.updateAt = Date.now()
+//   }
+//   next()
+// })
 
 
 /**

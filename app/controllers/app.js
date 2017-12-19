@@ -5,6 +5,8 @@
 var mongoose = require('mongoose')
 var uuid = require('uuid')
 var User = mongoose.model('User')
+var uploadFile = require('../service/upload.js').uploadFile;
+var path = require('path');
 
 exports.hasBody = async (ctx, next) => {
   var body = ctx.request.body || {}
@@ -58,4 +60,18 @@ exports.hasToken = async (ctx, next) => {
   ctx.session.user = user
 
   await next()
+}
+
+// 上传图片
+exports.uploadImage = async (ctx,next) => {
+  // 上传文件请求处理
+    let result = { code: 0 }
+    let serverFilePath = path.join( __dirname, '../../static' )
+
+    // 上传文件事件
+    result = await uploadFile( ctx, {
+      fileType: 'uploadImage',
+      path: serverFilePath
+    })
+    ctx.body = result
 }

@@ -4,6 +4,7 @@ const fs = require('fs')
 const path = require('path')
 const mongoose = require('mongoose')
 
+
 const db = 'mongodb://120.78.221.132:27017/main'
 
 /**
@@ -53,13 +54,18 @@ const Koa = require('koa')
 const logger = require('koa-logger')
 const session = require('koa-session')
 const bodyParser = require('koa-bodyparser')
+const koaStatic = require('koa-static')
 const app = new Koa()
 
 app.keys = ['zhangivon']
 app.use(logger())
 app.use(session(app))
-app.use(bodyParser())
+app.use(bodyParser({limit:'10mb'}))
 
+// 静态资源静态资源路径后端上传
+app.use(koaStatic(path.join( __dirname,  './static')));
+// 前台静态文件
+app.use(koaStatic(path.join( __dirname,  './views')));
 
 /**
  * 使用路由转发请求

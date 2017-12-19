@@ -10,16 +10,19 @@ module.exports = function(){
   })
 
   // user
-  router.post('/u/signup', App.hasBody, User.signup)
-  router.post('/u/update', App.hasBody, App.hasToken, User.update)
+  // router.post('/u/signup', App.hasBody, User.signup)
+  // router.post('/u/update', App.hasBody, App.hasToken, User.update)
 
   // DB Interface test
   router.get('/user/users',User.users)
   // router.post('/test/user/add',User.addUser)
   // router.post('/test/user/delete',User.deleteUser)
-  // modify name&pwd
+  // 修改用户信息接口
   router.post('/user/modify',User.editUser)
+  // 登陆接口
   router.post('/user/login',User.userLogin)
+  // 上传图片接口
+  router.post('/uploadFile',App.uploadImage)
 
   return router
 }

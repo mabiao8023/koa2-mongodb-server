@@ -5,7 +5,7 @@ const path = require('path')
 const mongoose = require('mongoose')
 
 
-const db = 'mongodb://120.78.221.132:27017/main'
+const db = 'mongodb://127.0.0.1:27017/main'
 
 /**
  * mongoose连接数据库
